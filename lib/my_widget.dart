@@ -83,55 +83,22 @@ class TotalScoreWidget extends StatelessWidget {
 }
 
 class PlayerNameWidget extends StatelessWidget {
-  const PlayerNameWidget({
-    super.key,
-    required this.controller,
-  });
+  const PlayerNameWidget(
+      {super.key, required this.controller, required this.playerIndex,this.textColor=Colors.purpleAccent});
 
   final DataController controller;
+  final int playerIndex;
+  final Color ?textColor;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Flexible(
-          child: Text(
-            controller.allPlayerList[0].playerName,textAlign: TextAlign.center,
-            style: const TextStyle(
-                color: Colors.orange,
-                fontWeight: FontWeight.bold,
-                fontSize: 18),
-          ),
-        ),
-        Flexible(
-          child: Text(
-            controller.allPlayerList[1].playerName,textAlign: TextAlign.center,
-            style: const TextStyle(
-                color: Colors.orange,
-                fontWeight: FontWeight.bold,
-                fontSize: 18),
-          ),
-        ),
-        Flexible(
-          child: Text(
-            controller.allPlayerList[2].playerName,textAlign: TextAlign.center,
-            style: const TextStyle(
-                color: Colors.orange,
-                fontWeight: FontWeight.bold,
-                fontSize: 18),
-          ),
-        ),
-        Flexible(
-          child: Text(
-            controller.allPlayerList[3].playerName,textAlign: TextAlign.center,
-            style: const TextStyle(
-                color: Colors.orange,
-                fontWeight: FontWeight.bold,
-                fontSize: 18),
-          ),
-        ),
-      ],
+    return Flexible(
+      child: Text(
+        controller.allPlayerList[playerIndex].playerName.toUpperCase(),
+        textAlign: TextAlign.center,
+        style:  TextStyle(
+            color: textColor, fontWeight: FontWeight.bold, fontSize: 18),
+      ),
     );
   }
 }

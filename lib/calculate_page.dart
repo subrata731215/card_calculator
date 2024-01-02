@@ -66,7 +66,15 @@ class CalculatePage extends ReactiveStateWidget<DataController> {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            PlayerNameWidget(controller: controller),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                PlayerNameWidget(controller: controller, playerIndex: 0),
+                PlayerNameWidget(controller: controller, playerIndex: 1),
+                PlayerNameWidget(controller: controller, playerIndex: 2),
+                PlayerNameWidget(controller: controller, playerIndex: 3),
+              ],
+            ),
             const Divider(color: Colors.grey, thickness: 3),
             TotalScoreWidget(controller: controller),
             const Divider(color: Colors.grey, thickness: 3),
@@ -175,87 +183,81 @@ class CalculatePage extends ReactiveStateWidget<DataController> {
                   );
                 }),
             const SizedBox(height: 20),
-            CupertinoButton(
-              color: Colors.black,
-              onPressed: () {
-                controller.callConfirm();
-              },
-              child: const Text(
-                'Confirm',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(height: 20),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: CupertinoButton(
-                    color: Colors.black,
-                    onPressed: () {},
-                    child: const Text(
-                      'CALL',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
+                CupertinoButton(
+                  color: Colors.black,
+                  onPressed: () {
+                    if (controller.player1Call.value > 0 &&
+                        controller.player2Call.value > 0 &&
+                        controller.player3Call.value > 0 &&
+                        controller.player4Call.value > 0) {
+                      controller.callConfirm();
+                      controller.visibilityCheck.value = true;
+                    }
+                  },
+                  child: const Text(
+                    'Confirm',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(width: 10),
-                Expanded(
-                  child: CupertinoButton(
-                    padding: EdgeInsets.zero,
-                    color: Colors.black,
-                    onPressed: () {
-                      if (controller.player1Call.value > 0 &&
-                          controller.player2Call.value > 0 &&
-                          controller.player3Call.value > 0 &&
-                          controller.player4Call.value > 0) {
-                        controller.nextButton();
-                        controller.scoreboardRound.value++;
-                      }
-                    },
-                    child: const Text(
-                      'Settle All',
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
+                Observer(
+                    listenable: controller.visibilityCheck,
+                    listener: (visible) {
+                      return Visibility(
+                        visible: visible,
+                        child: Expanded(
+                          child: CupertinoButton(
+                            padding: EdgeInsets.zero,
+                            color: Colors.black,
+                            onPressed: () {
+                              if (controller.player1Call.value > 0 &&
+                                  controller.player2Call.value > 0 &&
+                                  controller.player3Call.value > 0 &&
+                                  controller.player4Call.value > 0) {
+                                controller.nextButton();
+                                controller.scoreboardRound.value++;
+                                controller.visibilityCheck.value = false;
+                              }
+                            },
+                            child: const Text(
+                              'Settle All',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
               ],
             ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  controller.allPlayerList[0].playerName,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.blue),
-                ),
-                Text(
-                  controller.allPlayerList[1].playerName,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.blue),
-                ),
-                Text(
-                  controller.allPlayerList[2].playerName,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.blue),
-                ),
-                Text(
-                  controller.allPlayerList[3].playerName,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.blue),
-                ),
-              ],
+            const SizedBox(height: 10),
+            Opacity(
+              opacity: 0.5,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  PlayerNameWidget(
+                      controller: controller,
+                      playerIndex: 0,
+                      textColor: Colors.green),
+                  PlayerNameWidget(
+                      controller: controller,
+                      playerIndex: 1,
+                      textColor: Colors.pink),
+                  PlayerNameWidget(
+                      controller: controller,
+                      playerIndex: 2,
+                      textColor: Colors.green),
+                  PlayerNameWidget(
+                      controller: controller,
+                      playerIndex: 3,
+                      textColor: Colors.pink),
+                ],
+              ),
             ),
             const SizedBox(height: 10),
             Observer4(
@@ -268,38 +270,45 @@ class CalculatePage extends ReactiveStateWidget<DataController> {
                     child: ListView.builder(
                         itemCount: controller.player1CallList.length,
                         itemBuilder: (context, index) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                controller.player1CallList[index].toString(),
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.grey.withOpacity(0.8)),
-                              ),
-                              Text(
-                                controller.player2CallList[index].toString(),
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.grey.withOpacity(0.8)),
-                              ),
-                              Text(
-                                controller.player3CallList[index].toString(),
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.grey.withOpacity(0.8)),
-                              ),
-                              Text(
-                                controller.player4CallList[index].toString(),
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.grey.withOpacity(0.8)),
-                              ),
-                            ],
+                          return Opacity(
+                            opacity: 0.6,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  controller.player1CallList[index].toString(),
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Colors.green),
+                                ),
+                                Text(
+                                  controller.player2CallList[index].toString(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Colors.pink.withOpacity(0.8)),
+                                ),
+                                Text(
+                                  controller.player3CallList[index].toString(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Colors.green.withOpacity(0.8)),
+                                ),
+                                Text(
+                                  controller.player4CallList[index].toString(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Colors.pink.withOpacity(0.8)),
+                                ),
+                              ],
+                            ),
                           );
                         }),
                   );

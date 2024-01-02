@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:reactiv/reactiv.dart';
 
 class DataController extends ReactiveController {
-  ReactiveInt scoreboardRound=ReactiveInt(0);
+  ReactiveInt scoreboardRound = ReactiveInt(0);
   ReactiveInt callTotal = ReactiveInt(0);
   ReactiveBool isObscureText = ReactiveBool(true);
+  ReactiveBool visibilityCheck = ReactiveBool(false);
 
 
 
@@ -36,7 +37,6 @@ class DataController extends ReactiveController {
   ReactiveList<int> player2CallList = ReactiveList([]);
   ReactiveList<int> player3CallList = ReactiveList([]);
   ReactiveList<int> player4CallList = ReactiveList([]);
-
 
   int player1Point() {
     int sum = 0;
@@ -80,13 +80,10 @@ class DataController extends ReactiveController {
   }
 
   void nextButton() {
-
-      player1CallList.add(player1Call.value);
-      player2CallList.add(player2Call.value);
-      player3CallList.add(player3Call.value);
-      player4CallList.add(player4Call.value);
-
-
+    player1CallList.add(player1Call.value);
+    player2CallList.add(player2Call.value);
+    player3CallList.add(player3Call.value);
+    player4CallList.add(player4Call.value);
 
     player1Call.value = 0;
     player2Call.value = 0;
@@ -108,5 +105,3 @@ class PlayerModel {
       required this.inputCall,
       required this.totalCall});
 }
-
-
