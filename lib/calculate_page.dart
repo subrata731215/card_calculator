@@ -1,3 +1,5 @@
+import 'package:card_game_calculator/call_inpuit_widget.dart';
+import 'package:card_game_calculator/call_withraw_widget.dart';
 import 'package:card_game_calculator/controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +16,9 @@ class CalculatePage extends ReactiveStateWidget<DataController> {
     return BindController(controller: () => DataController());
   }
 
-  final FocusNode p1FocusNode = FocusNode();
-  final FocusNode p2FocusNode = FocusNode();
-  final FocusNode p3FocusNode = FocusNode();
-  final FocusNode p4FocusNode = FocusNode();
+  final ReactiveInt scoreboardRound = ReactiveInt(0);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +32,10 @@ class CalculatePage extends ReactiveStateWidget<DataController> {
             ),
             const SizedBox(width: 10),
             Observer(
-                listenable: controller.scoreboardRound,
+                listenable: scoreboardRound,
                 listener: (round) {
                   return Text(
-                    controller.scoreboardRound.value.toString(),
+                    scoreboardRound.value.toString(),
                     style: const TextStyle(
                         color: Colors.yellow,
                         fontWeight: FontWeight.bold,
@@ -79,159 +80,59 @@ class CalculatePage extends ReactiveStateWidget<DataController> {
             TotalScoreWidget(controller: controller),
             const Divider(color: Colors.grey, thickness: 3),
             const SizedBox(height: 10),
-            Observer(
-                listenable: controller.isObscureText,
-                listener: (obscure) {
-                  return Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          focusNode: p1FocusNode,
-                          maxLength: 1,
-                          onSubmitted: (focus) {
-                            FocusScope.of(context).requestFocus(p2FocusNode);
-                          },
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
-                          keyboardType: TextInputType.number,
-                          obscureText: controller.isObscureText.value,
-                          onChanged: (val) {
-                            if (val.isNotEmpty) {
-                              controller.player1Call.value = int.parse(val);
-                            }
-                          },
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.blue, width: 3))),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: TextField(
-                          focusNode: p2FocusNode,
-                          maxLength: 1,
-                          onSubmitted: (focus) {
-                            FocusScope.of(context).requestFocus(p3FocusNode);
-                          },
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
-                          keyboardType: TextInputType.number,
-                          obscureText: controller.isObscureText.value,
-                          onChanged: (val) {
-                            if (val.isNotEmpty) {
-                              controller.player2Call.value = int.parse(val);
-                            }
-                          },
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.blue, width: 3))),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: TextField(
-                          focusNode: p3FocusNode,
-                          maxLength: 1,
-                          onSubmitted: (focus) {
-                            FocusScope.of(context).requestFocus(p4FocusNode);
-                          },
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
-                          keyboardType: TextInputType.number,
-                          obscureText: controller.isObscureText.value,
-                          onChanged: (val) {
-                            if (val.isNotEmpty) {
-                              controller.player3Call.value = int.parse(val);
-                            }
-                          },
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.blue, width: 3))),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: TextField(
-                          focusNode: p4FocusNode,
-                          maxLength: 1,
-                          onSubmitted: (focus) {
-                            FocusScope.of(context).unfocus();
-                          },
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
-                          keyboardType: TextInputType.number,
-                          obscureText: controller.isObscureText.value,
-                          onChanged: (val) {
-                            if (val.isNotEmpty) {
-                              controller.player4Call.value = int.parse(val);
-                            }
-                          },
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.blue, width: 3))),
-                        ),
-                      ),
-                    ],
-                  );
-                }),
+
+            CallInputWidget(),
+            const SizedBox(height: 10),
+            CallWithrawWidget(),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CupertinoButton(
-                  color: Colors.black,
-                  onPressed: () {
-                    if (controller.player1Call.value > 0 &&
-                        controller.player2Call.value > 0 &&
-                        controller.player3Call.value > 0 &&
-                        controller.player4Call.value > 0) {
-                      controller.callConfirm();
-                      controller.visibilityCheck.value = true;
-                    }
-                  },
-                  child: const Text(
-                    'Confirm',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                Expanded(
+                  child: CupertinoButton(
+                    padding: EdgeInsets.zero,
+                    color: Colors.black,
+
+                    onPressed: () {
+                      controller.confirmButtonPress();
+                      FocusScope.of(context).unfocus();
+                      //controller.isInputReadonly.value = true;
+                    },
+
+                    child: const Text(
+                      'Confirm',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 10),
-                Observer(
-                    listenable: controller.visibilityCheck,
-                    listener: (visible) {
-                      return Visibility(
-                        visible: visible,
-                        child: Expanded(
-                          child: CupertinoButton(
-                            padding: EdgeInsets.zero,
-                            color: Colors.black,
-                            onPressed: () {
-                              if (controller.player1Call.value > 0 &&
-                                  controller.player2Call.value > 0 &&
-                                  controller.player3Call.value > 0 &&
-                                  controller.player4Call.value > 0) {
-                                controller.nextButton();
-                                controller.scoreboardRound.value++;
-                                controller.visibilityCheck.value = false;
-                              }
-                            },
-                            child: const Text(
-                              'Settle All',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
+                Expanded(
+                  child: CupertinoButton(
+                    padding: EdgeInsets.zero,
+                    color: Colors.black,
+                    onPressed: () {
+                      if (controller.player1CallController.text.isNotEmpty &&
+                          controller.player2CallController.text.isNotEmpty &&
+                          controller.player3CallController.text.isNotEmpty &&
+                          controller.player4CallController.text.isNotEmpty) {
+                        controller.settleAllButton();
+                        scoreboardRound.value++;
+                        controller.result1();
+                        controller.result2();
+                        controller.result3();
+                        controller.result4();
+
+                      }
+                    },
+                    child: const Text(
+                      'Settle All',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 10),
