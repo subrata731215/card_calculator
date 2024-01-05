@@ -23,11 +23,13 @@ class TotalScoreWidget extends StatelessWidget {
                 listenable: controller.player1CallList,
                 listener: (total) {
                   return Text(
-                    controller.player1Point().toString(),
+                    controller
+                        .player1FinalResult.value
+                        .toString(),
                     style: const TextStyle(
                         color: Colors.orange,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                        fontSize: 50),
                   );
                 }),
           ),
@@ -38,11 +40,12 @@ class TotalScoreWidget extends StatelessWidget {
                 listenable: controller.player2CallList,
                 listener: (total) {
                   return Text(
-                    controller.player2Point().toString(),
+                    controller
+                        .player2FinalResult.value.toString(),
                     style: const TextStyle(
                         color: Colors.orange,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                        fontSize: 50),
                   );
                 }),
           ),
@@ -53,11 +56,13 @@ class TotalScoreWidget extends StatelessWidget {
                 listenable: controller.player3CallList,
                 listener: (total) {
                   return Text(
-                    controller.player3Point().toString(),
+                    controller
+                        .totalPlayerPoint(controller.player3CallList)
+                        .toString(),
                     style: const TextStyle(
                         color: Colors.orange,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                        fontSize: 50),
                   );
                 }),
           ),
@@ -68,11 +73,13 @@ class TotalScoreWidget extends StatelessWidget {
                 listenable: controller.player4CallList,
                 listener: (total) {
                   return Text(
-                    controller.player4Point().toString(),
+                    controller
+                        .totalPlayerPoint(controller.player4CallList)
+                        .toString(),
                     style: const TextStyle(
                         color: Colors.orange,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                        fontSize: 50),
                   );
                 }),
           ),
@@ -84,19 +91,22 @@ class TotalScoreWidget extends StatelessWidget {
 
 class PlayerNameWidget extends StatelessWidget {
   const PlayerNameWidget(
-      {super.key, required this.controller, required this.playerIndex,this.textColor=Colors.purpleAccent});
+      {super.key,
+      required this.controller,
+      required this.playerIndex,
+      this.textColor = Colors.purpleAccent});
 
   final DataController controller;
   final int playerIndex;
-  final Color ?textColor;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
     return Flexible(
       child: Text(
-        controller.allPlayerList[playerIndex].playerName.toUpperCase(),
+        controller.allPlayerList[playerIndex].toUpperCase(),
         textAlign: TextAlign.center,
-        style:  TextStyle(
+        style: TextStyle(
             color: textColor, fontWeight: FontWeight.bold, fontSize: 18),
       ),
     );

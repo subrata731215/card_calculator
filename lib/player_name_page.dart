@@ -32,48 +32,48 @@ class PlayerNamePage extends ReactiveStateWidget<DataController> {
               children: [
                 TextField(
                   focusNode: player1FocusNode,
-                  onSubmitted: (focus){
+                  onSubmitted: (focus) {
                     FocusScope.of(context).requestFocus(player2FocusNode);
                   },
                   onChanged: (val) {
                     if (val.isNotEmpty) {
-                      controller.allPlayerList[0].playerName = val;
+                      controller.allPlayerList[0] = val;
                     }
                   },
                   decoration: const InputDecoration(labelText: 'Player 1'),
                 ),
                 TextField(
                   focusNode: player2FocusNode,
-                  onSubmitted: (focus){
+                  onSubmitted: (focus) {
                     FocusScope.of(context).requestFocus(player3FocusNode);
                   },
                   onChanged: (val) {
                     if (val.isNotEmpty) {
-                      controller.allPlayerList[1].playerName = val;
+                      controller.allPlayerList[1] = val;
                     }
                   },
                   decoration: const InputDecoration(labelText: 'Player 2'),
                 ),
                 TextField(
                   focusNode: player3FocusNode,
-                  onSubmitted: (focus){
+                  onSubmitted: (focus) {
                     FocusScope.of(context).requestFocus(player4FocusNode);
                   },
                   onChanged: (val) {
                     if (val.isNotEmpty) {
-                      controller.allPlayerList[2].playerName = val;
+                      controller.allPlayerList[2] = val;
                     }
                   },
                   decoration: const InputDecoration(labelText: 'Player 3'),
                 ),
                 TextField(
                   focusNode: player4FocusNode,
-                  onSubmitted: (focus){
+                  onSubmitted: (focus) {
                     FocusScope.of(context).unfocus();
                   },
                   onChanged: (val) {
                     if (val.isNotEmpty) {
-                      controller.allPlayerList[3].playerName = val;
+                      controller.allPlayerList[3] = val;
                     }
                   },
                   decoration: const InputDecoration(labelText: 'Player 4'),
