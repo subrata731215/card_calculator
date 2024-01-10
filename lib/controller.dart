@@ -44,7 +44,7 @@ class CallBridgeController extends ReactiveController {
 
   int player1Score() {
     if (int.parse(player1WithdrawCallController.text) <
-            int.parse(player1CallController.text) ||
+        int.parse(player1CallController.text) ||
         int.parse(player1WithdrawCallController.text) >=
             int.parse(player1CallController.text) + 2) {
       p1score = -int.parse(player1CallController.text);
@@ -58,7 +58,7 @@ class CallBridgeController extends ReactiveController {
 
   int player2Score() {
     if (int.parse(player2WithdrawCallController.text) <
-            int.parse(player2CallController.text) ||
+        int.parse(player2CallController.text) ||
         int.parse(player2WithdrawCallController.text) >=
             int.parse(player2CallController.text) + 2) {
       p2score = -int.parse(player2CallController.text);
@@ -72,7 +72,7 @@ class CallBridgeController extends ReactiveController {
 
   int player3Score() {
     if (int.parse(player3WithdrawCallController.text) <
-            int.parse(player3CallController.text) ||
+        int.parse(player3CallController.text) ||
         int.parse(player3WithdrawCallController.text) >=
             int.parse(player3CallController.text) + 2) {
       p3score = -int.parse(player3CallController.text);
@@ -86,7 +86,7 @@ class CallBridgeController extends ReactiveController {
 
   int player4Score() {
     if (int.parse(player4WithdrawCallController.text) <
-            int.parse(player4CallController.text) ||
+        int.parse(player4CallController.text) ||
         int.parse(player4WithdrawCallController.text) >=
             int.parse(player4CallController.text) + 2) {
       p4score = -int.parse(player4CallController.text);
@@ -122,6 +122,8 @@ class CallBridgeController extends ReactiveController {
         player3WithdrawCallController.text.isNotEmpty &&
         player4WithdrawCallController.text.isNotEmpty &&
         totalWithdrawCall() == 13) {
+      obscure.value = true;
+
       /// ScoreBoard
       scoreboardRound.value++;
 
@@ -192,4 +194,10 @@ class CallBridgeController extends ReactiveController {
     }
     return sum;
   }
+
+
+
 }
+
+
+

@@ -79,10 +79,16 @@ class PlayerNamePage extends ReactiveStateWidget<CallBridgeController> {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CalculatePage()));
+                      if (controller.player1.value.isNotEmpty &&
+                          controller.player2.value.isNotEmpty &&
+                          controller.player3.value.isNotEmpty &&
+                          controller.player4.value.isNotEmpty) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CalculatePage()));
+                      }
+
                     },
                     child: const Text('Next')),
               ],
