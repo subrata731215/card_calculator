@@ -1,13 +1,14 @@
 import 'package:card_game_calculator/calculate_page.dart';
 import 'package:card_game_calculator/controller.dart';
+import 'package:card_game_calculator/my_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:reactiv/reactiv.dart';
 
-class PlayerNamePage extends ReactiveStateWidget<DataController> {
+class PlayerNamePage extends ReactiveStateWidget<CallBridgeController> {
   @override
-  BindController<DataController>? bindController() {
+  BindController<CallBridgeController>? bindController() {
     // TODO: implement bindController
-    return BindController(controller: () => DataController());
+    return BindController(controller: () => CallBridgeController());
   }
 
   PlayerNamePage({super.key});
@@ -31,50 +32,42 @@ class PlayerNamePage extends ReactiveStateWidget<DataController> {
             Column(
               children: [
                 TextField(
+                  onChanged: (value) {
+                    controller.player1.value = value;
+                  },
                   focusNode: player1FocusNode,
                   onSubmitted: (focus) {
                     FocusScope.of(context).requestFocus(player2FocusNode);
                   },
-                  onChanged: (val) {
-                    if (val.isNotEmpty) {
-                      controller.allPlayerList[0] = val;
-                    }
-                  },
                   decoration: const InputDecoration(labelText: 'Player 1'),
                 ),
                 TextField(
+                  onChanged: (value) {
+                    controller.player2.value = value;
+                  },
                   focusNode: player2FocusNode,
                   onSubmitted: (focus) {
                     FocusScope.of(context).requestFocus(player3FocusNode);
                   },
-                  onChanged: (val) {
-                    if (val.isNotEmpty) {
-                      controller.allPlayerList[1] = val;
-                    }
-                  },
                   decoration: const InputDecoration(labelText: 'Player 2'),
                 ),
                 TextField(
+                  onChanged: (value) {
+                    controller.player3.value = value;
+                  },
                   focusNode: player3FocusNode,
                   onSubmitted: (focus) {
                     FocusScope.of(context).requestFocus(player4FocusNode);
                   },
-                  onChanged: (val) {
-                    if (val.isNotEmpty) {
-                      controller.allPlayerList[2] = val;
-                    }
-                  },
                   decoration: const InputDecoration(labelText: 'Player 3'),
                 ),
                 TextField(
+                  onChanged: (value) {
+                    controller.player4.value = value;
+                  },
                   focusNode: player4FocusNode,
                   onSubmitted: (focus) {
                     FocusScope.of(context).unfocus();
-                  },
-                  onChanged: (val) {
-                    if (val.isNotEmpty) {
-                      controller.allPlayerList[3] = val;
-                    }
                   },
                   decoration: const InputDecoration(labelText: 'Player 4'),
                 ),
