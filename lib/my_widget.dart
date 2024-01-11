@@ -54,24 +54,150 @@ class PlayerNameWidget extends ReactiveStateWidget<CallBridgeController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Flexible(
-            child: Text(controller.player1.value.toUpperCase(),
-                textAlign: TextAlign.center, style: nameTextStyle),
+          Expanded(
+            child: Observer(
+                listenable: controller.player1Name,
+                listener: (p1name) {
+                  return InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: TextField(
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                  onChanged: (name) {
+                                    if (name.isNotEmpty) {
+                                      controller.player1Name.value = name;
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      hintText: 'Change Player1 Name'),
+                                ),
+                                actions: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Ok')),
+                                ],
+                              ));
+                    },
+                    child: Text(controller.player1Name.value.toUpperCase(),
+                        textAlign: TextAlign.center, style: nameTextStyle),
+                  );
+                }),
           ),
-          const SizedBox(width: 5),
-          Flexible(
-            child: Text(controller.player2.value.toUpperCase(),
-                textAlign: TextAlign.center, style: nameTextStyle),
+          //  const SizedBox(width: 5),
+          Expanded(
+            child: Observer(
+                listenable: controller.player2Name,
+                listener: (p2name) {
+                  return InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: TextField(
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                  onChanged: (name) {
+                                    controller.player2Name.value = name;
+                                  },
+                                  decoration:  InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(10)),
+                                      hintText: 'Change player2 Name'),
+                                ),
+                                actions: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Ok')),
+                                ],
+                              ));
+                    },
+                    child: Text(controller.player2Name.value.toUpperCase(),
+                        textAlign: TextAlign.center, style: nameTextStyle),
+                  );
+                }),
           ),
-          const SizedBox(width: 5),
-          Flexible(
-            child: Text(controller.player3.value.toUpperCase(),
-                textAlign: TextAlign.center, style: nameTextStyle),
+          // const SizedBox(width: 5),
+          Expanded(
+            child: Observer(
+                listenable: controller.player3Name,
+                listener: (p3name) {
+                  return InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: TextField(
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                  onChanged: (name) {
+                                    controller.player3Name.value = name;
+                                  },
+                                  decoration:  InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(10)),
+                                      hintText: 'Change Player3 Name'),
+                                ),
+                                actions: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Ok')),
+                                ],
+                              ));
+                    },
+                    child: Text(controller.player3Name.value.toUpperCase(),
+                        textAlign: TextAlign.center, style: nameTextStyle),
+                  );
+                }),
           ),
-          const SizedBox(width: 5),
-          Flexible(
-            child: Text(controller.player4.value.toUpperCase(),
-                textAlign: TextAlign.center, style: nameTextStyle),
+          //   const SizedBox(width: 5),
+          Expanded(
+            child: Observer(
+                listenable: controller.player4Name,
+                listener: (p4name) {
+                  return InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: TextField(
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                  onChanged: (name) {
+                                    controller.player4Name.value = name;
+                                  },
+                                  decoration:  InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(10)),
+                                      hintText: 'Change Player4 Name'),
+                                ),
+                                actions: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Ok')),
+                                ],
+                              ));
+                    },
+                    child: Text(controller.player4Name.value.toUpperCase(),
+                        textAlign: TextAlign.center, style: nameTextStyle),
+                  );
+                }),
           ),
         ],
       ),
@@ -80,4 +206,4 @@ class PlayerNameWidget extends ReactiveStateWidget<CallBridgeController> {
 }
 
 TextStyle nameTextStyle = const TextStyle(
-    color: Colors.brown, fontWeight: FontWeight.bold, fontSize: 18);
+    color: Colors.brown, fontWeight: FontWeight.bold, fontSize: 15);

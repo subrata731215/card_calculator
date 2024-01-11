@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:reactiv/reactiv.dart';
 
@@ -9,10 +8,10 @@ class CallBridgeController extends ReactiveController {
 
   /// playerName
 
-  ReactiveString player1 = ReactiveString('');
-  ReactiveString player2 = ReactiveString('');
-  ReactiveString player3 = ReactiveString('');
-  ReactiveString player4 = ReactiveString('');
+  ReactiveString player1Name = ReactiveString('');
+  ReactiveString player2Name = ReactiveString('');
+  ReactiveString player3Name = ReactiveString('');
+  ReactiveString player4Name = ReactiveString('');
 
   /// call controller
   TextEditingController player1CallController = TextEditingController();
@@ -44,7 +43,7 @@ class CallBridgeController extends ReactiveController {
 
   int player1Score() {
     if (int.parse(player1WithdrawCallController.text) <
-        int.parse(player1CallController.text) ||
+            int.parse(player1CallController.text) ||
         int.parse(player1WithdrawCallController.text) >=
             int.parse(player1CallController.text) + 2) {
       p1score = -int.parse(player1CallController.text);
@@ -58,7 +57,7 @@ class CallBridgeController extends ReactiveController {
 
   int player2Score() {
     if (int.parse(player2WithdrawCallController.text) <
-        int.parse(player2CallController.text) ||
+            int.parse(player2CallController.text) ||
         int.parse(player2WithdrawCallController.text) >=
             int.parse(player2CallController.text) + 2) {
       p2score = -int.parse(player2CallController.text);
@@ -72,7 +71,7 @@ class CallBridgeController extends ReactiveController {
 
   int player3Score() {
     if (int.parse(player3WithdrawCallController.text) <
-        int.parse(player3CallController.text) ||
+            int.parse(player3CallController.text) ||
         int.parse(player3WithdrawCallController.text) >=
             int.parse(player3CallController.text) + 2) {
       p3score = -int.parse(player3CallController.text);
@@ -86,7 +85,7 @@ class CallBridgeController extends ReactiveController {
 
   int player4Score() {
     if (int.parse(player4WithdrawCallController.text) <
-        int.parse(player4CallController.text) ||
+            int.parse(player4CallController.text) ||
         int.parse(player4WithdrawCallController.text) >=
             int.parse(player4CallController.text) + 2) {
       p4score = -int.parse(player4CallController.text);
@@ -194,10 +193,4 @@ class CallBridgeController extends ReactiveController {
     }
     return sum;
   }
-
-
-
 }
-
-
-

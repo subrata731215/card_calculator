@@ -1,6 +1,5 @@
 import 'package:card_game_calculator/calculate_page.dart';
 import 'package:card_game_calculator/controller.dart';
-import 'package:card_game_calculator/my_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:reactiv/reactiv.dart';
 
@@ -20,85 +19,120 @@ class PlayerNamePage extends ReactiveStateWidget<CallBridgeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Players'),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Column(
-          children: [
-            Column(
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          padding: const EdgeInsets.symmetric(vertical: 50),
+          decoration: BoxDecoration(
+              image: const DecorationImage(
+                  image: AssetImage('assets/background.jpeg'),
+                  fit: BoxFit.cover),
+              border: Border.all(color: Colors.black, width: 3)),
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
               children: [
-                TextField(
-                  onChanged: (value) {
-                    controller.player1.value = value;
-                  },
-                  focusNode: player1FocusNode,
-                  onSubmitted: (focus) {
-                    FocusScope.of(context).requestFocus(player2FocusNode);
-                  },
-                  decoration: const InputDecoration(labelText: 'Player 1'),
+                Column(
+                  children: [
+                    TextField(
+                        onChanged: (value) {
+                          controller.player1Name.value = value;
+                        },
+                        style: typeTextStyle,
+                        focusNode: player1FocusNode,
+                        onSubmitted: (focus) {
+                          FocusScope.of(context).requestFocus(player2FocusNode);
+                        },
+                        decoration: inputDecoration),
+                    TextField(
+                        onChanged: (value) {
+                          controller.player2Name.value = value;
+                        },
+                        style: typeTextStyle,
+                        focusNode: player2FocusNode,
+                        onSubmitted: (focus) {
+                          FocusScope.of(context).requestFocus(player3FocusNode);
+                        },
+                        decoration: inputDecoration.copyWith(
+                            hintText: 'Player 2 Name')),
+                    TextField(
+                        onChanged: (value) {
+                          controller.player3Name.value = value;
+                        },
+                        style: typeTextStyle,
+                        focusNode: player3FocusNode,
+                        onSubmitted: (focus) {
+                          FocusScope.of(context).requestFocus(player4FocusNode);
+                        },
+                        decoration: inputDecoration.copyWith(
+                            hintText: 'Player 3 Name')),
+                    TextField(
+                        onChanged: (value) {
+                          controller.player4Name.value = value;
+                        },
+                        style: typeTextStyle,
+                        focusNode: player4FocusNode,
+                        onSubmitted: (focus) {
+                          FocusScope.of(context).unfocus();
+                        },
+                        decoration: inputDecoration.copyWith(
+                            hintText: 'Player 4 Name')),
+                  ],
                 ),
-                TextField(
-                  onChanged: (value) {
-                    controller.player2.value = value;
-                  },
-                  focusNode: player2FocusNode,
-                  onSubmitted: (focus) {
-                    FocusScope.of(context).requestFocus(player3FocusNode);
-                  },
-                  decoration: const InputDecoration(labelText: 'Player 2'),
+                const SizedBox(height: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          if (controller.player1Name.value.isNotEmpty &&
+                              controller.player2Name.value.isNotEmpty &&
+                              controller.player3Name.value.isNotEmpty &&
+                              controller.player4Name.value.isNotEmpty) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CalculatePage()));
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                                    padding: EdgeInsets.all(10),
+                                    behavior: SnackBarBehavior.floating,
+                                    // width: 320,
+                                    showCloseIcon: true,
+                                    closeIconColor: Colors.red,
+                                    backgroundColor: Colors.black,
+                                    elevation: 30,
+                                    content: Text(
+                                      'Input All The Player Name Field',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 20),
+                                    )));
+                          }
+                        },
+                        child: const Text('Next')),
+                  ],
                 ),
-                TextField(
-                  onChanged: (value) {
-                    controller.player3.value = value;
-                  },
-                  focusNode: player3FocusNode,
-                  onSubmitted: (focus) {
-                    FocusScope.of(context).requestFocus(player4FocusNode);
-                  },
-                  decoration: const InputDecoration(labelText: 'Player 3'),
-                ),
-                TextField(
-                  onChanged: (value) {
-                    controller.player4.value = value;
-                  },
-                  focusNode: player4FocusNode,
-                  onSubmitted: (focus) {
-                    FocusScope.of(context).unfocus();
-                  },
-                  decoration: const InputDecoration(labelText: 'Player 4'),
-                ),
+                const Text(
+                    '*Player 1, Player 2, Player 3, Player 4 are filled mandatory*',
+                    style: TextStyle(color: Colors.red, fontSize: 14)),
               ],
             ),
-            const SizedBox(height: 20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                ElevatedButton(
-                    onPressed: () {
-                      if (controller.player1.value.isNotEmpty &&
-                          controller.player2.value.isNotEmpty &&
-                          controller.player3.value.isNotEmpty &&
-                          controller.player4.value.isNotEmpty) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CalculatePage()));
-                      }
-
-                    },
-                    child: const Text('Next')),
-              ],
-            ),
-            const Text(
-                '*Player 1, Player 2, Player 3, Player 4 are filled mandatory*',
-                style: TextStyle(color: Colors.red, fontSize: 14)),
-          ],
+          ),
         ),
       ),
     );
   }
 }
+
+InputDecoration inputDecoration = const InputDecoration(
+  hintText: 'Player 1 Name',
+  hintStyle: TextStyle(color: Colors.black),
+  prefixIcon: Icon(Icons.star, size: 15, color: Colors.red),
+  icon: Icon(Icons.person_sharp),
+);
+
+TextStyle typeTextStyle = const TextStyle(
+    fontSize: 20, fontWeight: FontWeight.w900, color: Colors.deepPurple);

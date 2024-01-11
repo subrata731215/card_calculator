@@ -6,19 +6,19 @@ import 'package:reactiv/reactiv.dart';
 import 'my_widget.dart';
 
 class CalculatePage extends ReactiveStateWidget<CallBridgeController> {
- const CalculatePage({super.key});
+  const CalculatePage({super.key});
 
   @override
   BindController<CallBridgeController>? bindController() {
     return BindController(controller: () => CallBridgeController());
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             const Text(
@@ -30,7 +30,7 @@ class CalculatePage extends ReactiveStateWidget<CallBridgeController> {
                 listenable: controller.scoreboardRound,
                 listener: (round) {
                   return Text(
-                   controller. scoreboardRound.value.toString(),
+                    controller.scoreboardRound.value.toString(),
                     style: const TextStyle(
                         color: Colors.yellow,
                         fontWeight: FontWeight.bold,
@@ -60,7 +60,8 @@ class CalculatePage extends ReactiveStateWidget<CallBridgeController> {
             const EdgeInsets.only(left: 18.0, right: 18, top: 5, bottom: 5),
         child: Column(
           children: [
-            const PlayerNameWidget(),
+            const SizedBox(height: 20),
+             const PlayerNameWidget(),
             divider,
             const TotalScoreWidget(),
             divider,
@@ -76,19 +77,18 @@ class CalculatePage extends ReactiveStateWidget<CallBridgeController> {
                     onPressed: () {
                       controller.confirmButton();
                     },
-                    child: const Text('Confirm')),
+                    child: const Text('1. Confirm')),
                 const SizedBox(width: 40),
                 ElevatedButton(
                     onPressed: () {
                       controller.nextButton();
                     },
-                    child: const Text('Next')),
-                const SizedBox(width: 40),
+                    child: const Text('2. Next')),
               ],
             ),
             const SizedBox(height: 10),
             divider,
-            const PlayerNameWidget(),
+             PlayerNameWidget(),
             const SizedBox(height: 10),
             Expanded(
               child: Observer4(
@@ -100,26 +100,23 @@ class CalculatePage extends ReactiveStateWidget<CallBridgeController> {
                     return ListView.builder(
                         itemCount: controller.player4CallList.length,
                         itemBuilder: (context, index) {
-                          return Opacity(
-                            opacity: 0.6,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                PlayerWiseCallCountWidget(
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              PlayerWiseCallCountWidget(
+                                controller: controller,
+                                text: controller.player1CallList[index],
+                              ),
+                              PlayerWiseCallCountWidget(
                                   controller: controller,
-                                  text: controller.player1CallList[index],
-                                ),
-                                PlayerWiseCallCountWidget(
-                                    controller: controller,
-                                    text: controller.player2CallList[index]),
-                                PlayerWiseCallCountWidget(
-                                    controller: controller,
-                                    text: controller.player3CallList[index]),
-                                PlayerWiseCallCountWidget(
-                                    controller: controller,
-                                    text: controller.player4CallList[index]),
-                              ],
-                            ),
+                                  text: controller.player2CallList[index]),
+                              PlayerWiseCallCountWidget(
+                                  controller: controller,
+                                  text: controller.player3CallList[index]),
+                              PlayerWiseCallCountWidget(
+                                  controller: controller,
+                                  text: controller.player4CallList[index]),
+                            ],
                           );
                         });
                   }),

@@ -1,9 +1,7 @@
 import 'package:card_game_calculator/call_inpuit_widget.dart';
 import 'package:card_game_calculator/controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:reactiv/reactiv.dart';
-import 'package:reactiv/state_management/widgets/observer.dart';
 
 class CallWithrawWidget extends ReactiveStateWidget<CallBridgeController> {
   @override

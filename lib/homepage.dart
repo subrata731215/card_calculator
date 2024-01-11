@@ -8,34 +8,40 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                  color: Colors.orange,
-                  border: Border.all(color: Colors.green, width: 5)),
-              child: const Text(
-                'Call Bridge Calculator',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              ),
-            ),
-            const SizedBox(height: 20),
-            CupertinoButton(
-                color: Colors.green,
-                child: const Icon(
-                  Icons.arrow_forward,
-                  size: 30,
+      body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/call_bridge.png'),
+                fit: BoxFit.cover)),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                    color: Colors.orange,
+                    border: Border.all(color: Colors.green, width: 5)),
+                child: const Text(
+                  'Call Bridge Calculator',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PlayerNamePage()));
-                })
-          ],
+              ),
+              const SizedBox(height: 20),
+              CupertinoButton(
+                  color: Colors.green,
+                  child: const Icon(
+                    Icons.arrow_forward,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PlayerNamePage()));
+                  })
+            ],
+          ),
         ),
       ),
     );

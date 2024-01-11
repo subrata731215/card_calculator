@@ -1,7 +1,4 @@
-import 'package:card_game_calculator/calculate_page.dart';
-import 'package:card_game_calculator/player_name_page.dart';
 import 'package:flutter/material.dart';
-
 import 'homepage.dart';
 
 void main() {
