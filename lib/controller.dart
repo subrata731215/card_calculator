@@ -5,6 +5,7 @@ class CallBridgeController extends ReactiveController {
   final ReactiveInt scoreboardRound = ReactiveInt(0);
 
   ReactiveBool obscure = ReactiveBool(true);
+  ReactiveBool isScreenOn=ReactiveBool(false);
 
   /// playerName
 

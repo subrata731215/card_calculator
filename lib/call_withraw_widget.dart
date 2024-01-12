@@ -23,60 +23,79 @@ class CallWithrawWidget extends ReactiveStateWidget<CallBridgeController> {
       children: [
         Expanded(
           child: TextField(
-              controller: controller.player1WithdrawCallController,
-              focusNode: pp1FocusNode,
-              maxLength: 2,
-              onSubmitted: (focus) {
-                FocusScope.of(context).requestFocus(pp2FocusNode);
-              },
-              textAlign: TextAlign.center,
-              style: textFieldTextStyle,
-              keyboardType: TextInputType.number,
-              decoration: inputDecoration),
+            controller: controller.player1WithdrawCallController,
+            focusNode: pp1FocusNode,
+            maxLength: 2,
+            onSubmitted: (focus) {
+              FocusScope.of(context).requestFocus(pp2FocusNode);
+            },
+            textAlign: TextAlign.center,
+            style: textFieldTextStyle(controller),
+            keyboardType: TextInputType.number,
+            decoration: inputDecoration(controller),
+          ),
         ),
         const SizedBox(width: 10),
         Expanded(
           child: TextField(
-              controller: controller.player2WithdrawCallController,
-              focusNode: pp2FocusNode,
-              maxLength: 2,
-              onSubmitted: (focus) {
-                FocusScope.of(context).requestFocus(pp3FocusNode);
-              },
-              textAlign: TextAlign.center,
-              style: textFieldTextStyle,
-              keyboardType: TextInputType.number,
-              decoration: inputDecoration),
+            controller: controller.player2WithdrawCallController,
+            focusNode: pp2FocusNode,
+            maxLength: 2,
+            onSubmitted: (focus) {
+              FocusScope.of(context).requestFocus(pp3FocusNode);
+            },
+            textAlign: TextAlign.center,
+            style: textFieldTextStyle(controller),
+            keyboardType: TextInputType.number,
+            decoration: inputDecoration(controller),
+          ),
         ),
         const SizedBox(width: 10),
         Expanded(
           child: TextField(
-              controller: controller.player3WithdrawCallController,
-              focusNode: pp3FocusNode,
-              maxLength: 2,
-              onSubmitted: (focus) {
-                FocusScope.of(context).requestFocus(pp4FocusNode);
-              },
-              textAlign: TextAlign.center,
-              style: textFieldTextStyle,
-              keyboardType: TextInputType.number,
-              decoration: inputDecoration),
+            controller: controller.player3WithdrawCallController,
+            focusNode: pp3FocusNode,
+            maxLength: 2,
+            onSubmitted: (focus) {
+              FocusScope.of(context).requestFocus(pp4FocusNode);
+            },
+            textAlign: TextAlign.center,
+            style: textFieldTextStyle(controller),
+            keyboardType: TextInputType.number,
+            decoration: inputDecoration(controller),
+          ),
         ),
         const SizedBox(width: 10),
         Expanded(
           child: TextField(
-              controller: controller.player4WithdrawCallController,
-              focusNode: pp4FocusNode,
-              maxLength: 2,
-              onSubmitted: (focus) {
-                FocusScope.of(context).unfocus();
-              },
-              textAlign: TextAlign.center,
-              style: textFieldTextStyle,
-              keyboardType: TextInputType.number,
-              decoration: inputDecoration),
+            controller: controller.player4WithdrawCallController,
+            focusNode: pp4FocusNode,
+            maxLength: 2,
+            onSubmitted: (focus) {
+              FocusScope.of(context).unfocus();
+            },
+            textAlign: TextAlign.center,
+            style: textFieldTextStyle(controller),
+            keyboardType: TextInputType.number,
+            decoration: inputDecoration(controller),
+          ),
         ),
       ],
     );
   }
+}
+
+InputDecoration inputDecoration(CallBridgeController controller) {
+  return InputDecoration(
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+          color: controller.isScreenOn.value ? Colors.white : Colors.blue,
+          width: 1),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+          color: controller.isScreenOn.value ? Colors.white : Colors.blue,
+          width: 1),
+    ),
+  );
 }

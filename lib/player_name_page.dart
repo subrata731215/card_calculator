@@ -36,7 +36,7 @@ class PlayerNamePage extends ReactiveStateWidget<CallBridgeController> {
                   children: [
                     TextField(
                         onChanged: (value) {
-                          controller.player1Name.value = value;
+                          controller.player1Name.value = value.toUpperCase();
                         },
                         style: typeTextStyle,
                         focusNode: player1FocusNode,
@@ -84,6 +84,7 @@ class PlayerNamePage extends ReactiveStateWidget<CallBridgeController> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     ElevatedButton(
+
                         onPressed: () {
                           if (controller.player1Name.value.isNotEmpty &&
                               controller.player2Name.value.isNotEmpty &&
@@ -101,8 +102,7 @@ class PlayerNamePage extends ReactiveStateWidget<CallBridgeController> {
                                     behavior: SnackBarBehavior.floating,
                                     // width: 320,
                                     showCloseIcon: true,
-                                    closeIconColor: Colors.red,
-                                    backgroundColor: Colors.black,
+                                    backgroundColor: Colors.red,
                                     elevation: 30,
                                     content: Text(
                                       'Input All The Player Name Field',
@@ -115,9 +115,13 @@ class PlayerNamePage extends ReactiveStateWidget<CallBridgeController> {
                         child: const Text('Next')),
                   ],
                 ),
+                const SizedBox(height: 10),
                 const Text(
                     '*Player 1, Player 2, Player 3, Player 4 are filled mandatory*',
-                    style: TextStyle(color: Colors.red, fontSize: 14)),
+                    style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold)),
               ],
             ),
           ),
