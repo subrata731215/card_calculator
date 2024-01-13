@@ -2,6 +2,8 @@ import 'package:card_game_calculator/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:reactiv/reactiv.dart';
 
+/// total Score Widget
+
 class TotalScoreWidget extends ReactiveStateWidget<CallBridgeController> {
   @override
   BindController<CallBridgeController>? bindController() {
@@ -35,6 +37,7 @@ class TotalScoreWidget extends ReactiveStateWidget<CallBridgeController> {
         });
   }
 }
+
 
 TextStyle totalScoreTextStyle = const TextStyle(
     color: Colors.orange, fontWeight: FontWeight.bold, fontSize: 50);
@@ -228,3 +231,24 @@ TextStyle nameTextStyle(CallBridgeController controller) => TextStyle(
       fontSize: 15,
       letterSpacing:0.5 ,
     );
+
+/// Player Wise CountWidget
+
+class PlayerWiseCallCountWidget extends StatelessWidget {
+  const PlayerWiseCallCountWidget(
+      {super.key, required this.controller, required this.text});
+
+  final CallBridgeController controller;
+  final int text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text.toString(),
+      style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+          color: text.isNegative ? Colors.red : Colors.green),
+    );
+  }
+}
