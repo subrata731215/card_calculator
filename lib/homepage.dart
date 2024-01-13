@@ -39,7 +39,18 @@ class MyHomePage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => PlayerNamePage()));
-                  })
+                  }),
+              Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height / 5),
+                child: const Opacity(
+                  opacity: 0.5,
+                  child: Text(
+                    'Version name 0.0.1',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              )
             ],
           ),
         ),
