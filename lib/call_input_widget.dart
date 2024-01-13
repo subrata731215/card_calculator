@@ -2,7 +2,7 @@ import 'package:card_game_calculator/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:reactiv/reactiv.dart';
 
-import 'call_withraw_widget.dart';
+import 'call_withdraw_widget.dart';
 
 class CallInputWidget extends ReactiveStateWidget<CallBridgeController> {
   @override

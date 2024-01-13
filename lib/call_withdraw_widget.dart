@@ -1,16 +1,16 @@
-import 'package:card_game_calculator/call_inpuit_widget.dart';
+import 'package:card_game_calculator/call_input_widget.dart';
 import 'package:card_game_calculator/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:reactiv/reactiv.dart';
 
-class CallWithrawWidget extends ReactiveStateWidget<CallBridgeController> {
+class CallWithdrawWidget extends ReactiveStateWidget<CallBridgeController> {
   @override
   BindController<CallBridgeController>? bindController() {
     // TODO: implement bindController
     return BindController(controller: () => CallBridgeController());
   }
 
-  CallWithrawWidget({super.key});
+  CallWithdrawWidget({super.key});
 
   final FocusNode pp1FocusNode = FocusNode();
   final FocusNode pp2FocusNode = FocusNode();
