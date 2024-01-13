@@ -15,10 +15,10 @@ class CallBridgeController extends ReactiveController {
 
   /// playerName
 
-  ReactiveString player1Name = ReactiveString('Rahul');
-  ReactiveString player2Name = ReactiveString('Bisu');
-  ReactiveString player3Name = ReactiveString('Mukto');
-  ReactiveString player4Name = ReactiveString('Kala');
+  ReactiveString player1Name = ReactiveString('');
+  ReactiveString player2Name = ReactiveString('');
+  ReactiveString player3Name = ReactiveString('');
+  ReactiveString player4Name = ReactiveString('');
 
   /// call controller
   TextEditingController player1CallController = TextEditingController();
