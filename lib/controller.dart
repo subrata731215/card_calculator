@@ -3,16 +3,22 @@ import 'package:reactiv/reactiv.dart';
 
 class CallBridgeController extends ReactiveController {
   final ReactiveInt scoreboardRound = ReactiveInt(0);
+  Color activeScreenColor = Colors.white;
+  Color deActiveScreenColor = Colors.black;
+
+  Color screenOnOffColor() {
+    return isScreenOn.value ? activeScreenColor : deActiveScreenColor;
+  }
 
   ReactiveBool obscure = ReactiveBool(true);
-  ReactiveBool isScreenOn=ReactiveBool(false);
+  ReactiveBool isScreenOn = ReactiveBool(false);
 
   /// playerName
 
-  ReactiveString player1Name = ReactiveString('');
-  ReactiveString player2Name = ReactiveString('');
-  ReactiveString player3Name = ReactiveString('');
-  ReactiveString player4Name = ReactiveString('');
+  ReactiveString player1Name = ReactiveString('Rahul');
+  ReactiveString player2Name = ReactiveString('Bisu');
+  ReactiveString player3Name = ReactiveString('Mukto');
+  ReactiveString player4Name = ReactiveString('Kala');
 
   /// call controller
   TextEditingController player1CallController = TextEditingController();
@@ -194,4 +200,18 @@ class CallBridgeController extends ReactiveController {
     }
     return sum;
   }
+
+  /// Hat Tash todo
+final ReactiveInt cardHandlingIndex= ReactiveInt(0);
+
+  cardHandle(){
+    Color activeColor =Colors.orangeAccent;
+    Color deActiveColor =Colors.orangeAccent;
+
+
+  }
+
+
+
+
 }

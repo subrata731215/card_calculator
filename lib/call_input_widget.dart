@@ -35,9 +35,11 @@ class CallInputWidget extends ReactiveStateWidget<CallBridgeController> {
                   onSubmitted: (focus) {
                     FocusScope.of(context).requestFocus(p2FocusNode);
                   },
+                  onTapOutside: (focus) {
+                    FocusScope.of(context).unfocus();
+                  },
                   textAlign: TextAlign.center,
                   style: textFieldTextStyle(controller),
-
                   keyboardType: TextInputType.number,
                   decoration: inputDecoration(controller),
                 ),
@@ -54,7 +56,6 @@ class CallInputWidget extends ReactiveStateWidget<CallBridgeController> {
                   },
                   textAlign: TextAlign.center,
                   style: textFieldTextStyle(controller),
-
                   keyboardType: TextInputType.number,
                   decoration: inputDecoration(controller),
                 ),
@@ -71,7 +72,6 @@ class CallInputWidget extends ReactiveStateWidget<CallBridgeController> {
                   },
                   textAlign: TextAlign.center,
                   style: textFieldTextStyle(controller),
-
                   keyboardType: TextInputType.number,
                   decoration: inputDecoration(controller),
                 ),
@@ -99,7 +99,7 @@ class CallInputWidget extends ReactiveStateWidget<CallBridgeController> {
 }
 
 TextStyle textFieldTextStyle(CallBridgeController controller) {
-  return  TextStyle(
+  return TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.w900,
       color: controller.isScreenOn.value ? Colors.white : Colors.black);

@@ -43,6 +43,9 @@ class PlayerNamePage extends ReactiveStateWidget<CallBridgeController> {
                         onSubmitted: (focus) {
                           FocusScope.of(context).requestFocus(player2FocusNode);
                         },
+                        onTapOutside: (focus) {
+                          FocusScope.of(context).unfocus();
+                        },
                         decoration: inputDecoration),
                     TextField(
                         onChanged: (value) {
@@ -84,7 +87,6 @@ class PlayerNamePage extends ReactiveStateWidget<CallBridgeController> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     ElevatedButton(
-
                         onPressed: () {
                           if (controller.player1Name.value.isNotEmpty &&
                               controller.player2Name.value.isNotEmpty &&
@@ -134,8 +136,7 @@ class PlayerNamePage extends ReactiveStateWidget<CallBridgeController> {
 InputDecoration inputDecoration = const InputDecoration(
   hintText: 'Player 1 Name',
   hintStyle: TextStyle(color: Colors.black),
-  prefixIcon: Icon(Icons.star, size: 15, color: Colors.red),
-  icon: Icon(Icons.person_sharp),
+  icon: Icon(Icons.account_circle_outlined),
 );
 
 TextStyle typeTextStyle = const TextStyle(
