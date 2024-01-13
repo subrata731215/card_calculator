@@ -127,6 +127,7 @@ class CallBridgeController extends ReactiveController {
         player2WithdrawCallController.text.isNotEmpty &&
         player3WithdrawCallController.text.isNotEmpty &&
         player4WithdrawCallController.text.isNotEmpty &&
+        player4CallController.text.isNotEmpty&&
         totalWithdrawCall() == 13) {
       obscure.value = true;
 
