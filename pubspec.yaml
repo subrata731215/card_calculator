@@ -38,6 +38,7 @@ dependencies:
   reactiv: ^0.3.4
   wakelock_plus: ^1.1.4
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

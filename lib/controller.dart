@@ -203,16 +203,10 @@ class CallBridgeController extends ReactiveController {
   }
 
   /// Hat Tash todo
-final ReactiveInt cardHandlingIndex= ReactiveInt(0);
+  final ReactiveInt cardHandlingIndex = ReactiveInt(0);
 
-  cardHandle(){
-    Color activeColor =Colors.orangeAccent;
-    Color deActiveColor =Colors.orangeAccent;
-
-
+  cardHandle() {
+    Color activeColor = Colors.orangeAccent;
+    Color deActiveColor = Colors.orangeAccent;
   }
-
-
-
-
 }
