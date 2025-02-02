@@ -1,4 +1,6 @@
+import 'package:card_game_calculator/presentation/calculate_page/controller/calculate_screen_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:reactiv/reactiv.dart';
 
 class PlayerNameBox extends StatelessWidget {
   const PlayerNameBox({super.key, required this.playerName, required this.onChanged});
@@ -20,9 +22,12 @@ class PlayerNameBox extends StatelessWidget {
                     onChanged: onChanged,
                   ),
                   actions: [
-                    TextButton(onPressed: () {
-
-                    }, child: const Text('Save')),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Save'),
+                    ),
                   ],
                 );
               });
@@ -73,3 +78,5 @@ class PlayerNameRow extends StatelessWidget {
     );
   }
 }
+
+

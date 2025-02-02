@@ -1,15 +1,17 @@
+import 'package:card_game_calculator/infrastructure/model/player_model.dart';
 import 'package:card_game_calculator/presentation/calculate_page/controller/calculate_screen_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:reactiv/reactiv.dart';
 import 'presentation/homepage/homepage.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
   // await Hive.initFlutter();
-  //
   // await Hive.initFlutter();
-  // Hive.registerAdapter(PlayerNameModelAdapter());
-  // await HiveServices.instance.openBox();
+  // Hive.registerAdapter(PlayerModelAdapter());
+ // await HiveServices.instance.openBox();
 
   runApp(const MyApp());
 }

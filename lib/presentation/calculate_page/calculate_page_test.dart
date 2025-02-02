@@ -7,6 +7,9 @@ import 'package:card_game_calculator/presentation/calculate_page/utils/player_ca
 import 'package:card_game_calculator/presentation/calculate_page/utils/player_name_box.dart';
 import 'package:card_game_calculator/presentation/calculate_page/utils/player_total_score_box.dart';
 import 'package:card_game_calculator/presentation/calculate_page/utils/total_call_text.dart';
+import 'package:card_game_calculator/presentation/calculate_page/widget/appbar_switch_widget.dart';
+import 'package:card_game_calculator/presentation/calculate_page/widget/player_name_final_widget.dart';
+import 'package:card_game_calculator/presentation/calculate_page/widget/player_total_score_widget.dart';
 import 'package:card_game_calculator/utils/button/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:reactiv/reactiv.dart';
@@ -30,29 +33,8 @@ class CalculatePage extends ReactiveStateWidget<CalculateScreenController> {
               borderRadius:
                   BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
           automaticallyImplyLeading: false,
-          actions: [
-            Tooltip(
-              message: 'AutoScreen On/Off',
-              child: Observer(
-                  listenable: controller.state.isScreenOn,
-                  listener: (screenOn) {
-                    return Switch(
-                        activeTrackColor: Colors.white,
-                        activeColor: Colors.yellow,
-                        inactiveThumbColor: Colors.white,
-                        value: controller.state.isScreenOn.value,
-                        onChanged: (value) {
-                          controller.state.isScreenOn.value = value;
-                          controller.state.brightness.value = Brightness.dark;
-                          if (controller.state.isScreenOn.value) {
-                            WakelockPlus.enable();
-                          } else {
-                            WakelockPlus.disable();
-                            controller.state.brightness.value = Brightness.light;
-                          }
-                        });
-                  }),
-            ),
+          actions: const [
+            AppbarSwitchWidget(),
           ],
           title: Observer(
               listenable: controller.state.totalCall,
@@ -69,46 +51,9 @@ class CalculatePage extends ReactiveStateWidget<CalculateScreenController> {
                 return Column(
                   children: [
                     const SizedBox(height: 5),
-                    PlayerNameRow(
-                      player1Name: controller.playerList[0].playerName,
-                      player2Name: controller.playerList[1].playerName,
-                      player3Name: controller.playerList[2].playerName,
-                      player4Name: controller.playerList[3].playerName,
-                      player1OnChanged: (value) {
-                        controller.playerList[0].playerName = value;
-                      },
-                      player2OnChanged: (value) {
-                        controller.playerList[1].playerName = value;
-                      },
-                      player3OnChanged: (value) {
-                        controller.playerList[2].playerName = value;
-                      },
-                      player4OnChanged: (value) {
-                        controller.playerList[3].playerName = value;
-                      },
-                    ),
+                    const PlayerNameFinalWidget(),
                     const Divider(color: Colors.grey, thickness: 2),
-                    Observer(
-                        listenable: controller.playerList,
-                        listener: (player) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              PlayerTotalScoreBox(
-                                  playerTotalScore:
-                                      controller.playerWiseTotalScore(controller.playerList[0].scoreList)),
-                              PlayerTotalScoreBox(
-                                  playerTotalScore:
-                                      controller.playerWiseTotalScore(controller.playerList[1].scoreList)),
-                              PlayerTotalScoreBox(
-                                  playerTotalScore:
-                                      controller.playerWiseTotalScore(controller.playerList[2].scoreList)),
-                              PlayerTotalScoreBox(
-                                  playerTotalScore:
-                                      controller.playerWiseTotalScore(controller.playerList[3].scoreList)),
-                            ],
-                          );
-                        }),
+                    const PlayerTotalScoreWidget(),
                     const Divider(color: Colors.grey, thickness: 2),
                     Observer(
                         listenable: controller.state.obscure,
@@ -211,25 +156,7 @@ class CalculatePage extends ReactiveStateWidget<CalculateScreenController> {
                     const SizedBox(height: 10),
                     if (controller.playerList[0].scoreList.isNotEmpty)
                       const Divider(color: Colors.grey, thickness: 2),
-                    if (controller.playerList[0].scoreList.isNotEmpty)
-                      PlayerNameRow(
-                        player1Name: controller.playerList[0].playerName,
-                        player2Name: controller.playerList[1].playerName,
-                        player3Name: controller.playerList[2].playerName,
-                        player4Name: controller.playerList[3].playerName,
-                        player1OnChanged: (value) {
-                          controller.playerList[0].playerName = value;
-                        },
-                        player2OnChanged: (value) {
-                          controller.playerList[1].playerName = value;
-                        },
-                        player3OnChanged: (value) {
-                          controller.playerList[2].playerName = value;
-                        },
-                        player4OnChanged: (value) {
-                          controller.playerList[3].playerName = value;
-                        },
-                      ),
+                    if (controller.playerList[0].scoreList.isNotEmpty) const PlayerNameFinalWidget(),
                     const SizedBox(height: 10),
                     if (controller.playerList[0].scoreList.isNotEmpty)
                       Expanded(

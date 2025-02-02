@@ -1,6 +1,7 @@
 import 'package:card_game_calculator/graphics/graphics_assets_const.dart';
 import 'package:card_game_calculator/graphics/graphics_colors_const.dart';
 import 'package:card_game_calculator/graphics/graphics_string_const.dart';
+import 'package:card_game_calculator/infrastructure/model/player_model.dart';
 import 'package:card_game_calculator/presentation/calculate_page/calculate_page_test.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class MyHomePage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => CalculatePage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CalculatePage()));
                 },
                 child: Container(
                   padding: const EdgeInsets.all(20),
@@ -51,3 +52,8 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+//
+// PlayerModel(playerName: 'player1', score: 0, scoreList: [], totalScore: 0),
+// PlayerModel(playerName: 'player2', score: 0, scoreList: [], totalScore: 0),
+// PlayerModel(playerName: 'player3', score: 0, scoreList: [], totalScore: 0),
+// PlayerModel(playerName: 'player4', score: 0, scoreList: [], totalScore: 0),

@@ -1,9 +1,14 @@
-class PlayerModel {
-  String playerName;
-  int score;
-  List<int> scoreList;
-  int totalScore;
+import 'package:reactiv/reactiv.dart';
 
-  PlayerModel(
-      {required this.playerName, required this.score, required this.scoreList, required this.totalScore});
+class PlayerModel {
+  ReactiveString playerName;
+  List<int> scoreList;
+
+  PlayerModel({required this.playerName, required this.scoreList});
+
+  int get totalScore {
+    int sum = 0;
+    sum = scoreList.fold(sum, (p, n) => p + n);
+    return sum;
+  }
 }

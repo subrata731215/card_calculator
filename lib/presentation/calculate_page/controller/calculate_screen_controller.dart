@@ -8,10 +8,10 @@ class CalculateScreenController extends ReactiveController {
   final state = _calculateState();
 
   ReactiveList<PlayerModel> playerList = ReactiveList([
-    PlayerModel(playerName: 'player1', score: 0, scoreList: [], totalScore: 0),
-    PlayerModel(playerName: 'player2', score: 0, scoreList: [], totalScore: 0),
-    PlayerModel(playerName: 'player3', score: 0, scoreList: [], totalScore: 0),
-    PlayerModel(playerName: 'player4', score: 0, scoreList: [], totalScore: 0),
+    PlayerModel(playerName: 'Player1'.reactiv, scoreList: []),
+    PlayerModel(playerName: 'Player2'.reactiv, scoreList: []),
+    PlayerModel(playerName: 'Player3'.reactiv, scoreList: []),
+    PlayerModel(playerName: 'Player4'.reactiv, scoreList: []),
   ]);
 
   int totalWithdrawCall() {
@@ -19,12 +19,6 @@ class CalculateScreenController extends ReactiveController {
         int.parse(state.player2WithdrawTEC.text) +
         int.parse(state.player3WithdrawTEC.text) +
         int.parse(state.player4WithdrawTEC.text);
-    return sum;
-  }
-
-  int playerWiseTotalScore(List<int> list) {
-    int sum = 0;
-    sum = list.fold(sum, (p, e) => p + e);
     return sum;
   }
 
@@ -89,18 +83,11 @@ class CalculateScreenController extends ReactiveController {
         state.player3WithdrawTEC.text.isEmpty &&
         state.player4WithdrawTEC.text.isEmpty) {
       state.totalCall.value = 0;
-      playerList[0]
-          .scoreList
-          .add(playerWiseSingleScore(state.player1CallTEC.text, state.player1CallTEC.text));
-      playerList[1]
-          .scoreList
-          .add(playerWiseSingleScore(state.player2CallTEC.text, state.player2CallTEC.text));
-      playerList[2]
-          .scoreList
-          .add(playerWiseSingleScore(state.player3CallTEC.text, state.player3CallTEC.text));
-      playerList[3]
-          .scoreList
-          .add(playerWiseSingleScore(state.player4CallTEC.text, state.player4CallTEC.text));
+      playerList[0].scoreList.add(int.parse(state.player1CallTEC.text));
+      playerList[1].scoreList.add(int.parse(state.player2CallTEC.text));
+      playerList[2].scoreList.add(int.parse(state.player3CallTEC.text));
+      playerList[3].scoreList.add(int.parse(state.player4CallTEC.text));
+
       state.clearAllTEC();
       state.obscure.value = true;
       state.isSecondStep.value = false;
